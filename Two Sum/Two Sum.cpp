@@ -1,18 +1,24 @@
 /*
- Hash Table 存取陣列內所有元素
+暴力解
+列舉所有數組看是否為目標值
+
+內循環j+1的原因是題目說明數組內不能重複
 */
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int>indies;  //建立hash table
         for(int i=0;i<nums.size();++i)
-            indies[nums[i]]=i;   //儲存元素進hash table
-        for(int i=0;i<nums.size();++i){
-            int left=target-nums[i];  //變數存取目標值減去差值,從差值中找元素
-            //hashtable 中因為不能重複選取元素所以需要近型限制
-            if(indies.count(left)&&indies[left]!=i)
-                return {i,indies[left]};
+        {
+            for(int j=i+1;j<nums.size();++j)
+            {
+                int sum=nums[i]+nums[j];
+                if(sum==target)
+                {
+                  return{i,j};   
+                }
+            }
+         
         }
         return {};
     }
